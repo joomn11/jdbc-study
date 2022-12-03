@@ -8,6 +8,9 @@ import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 트랜잭션 - 파라미터 연동, 풀을 고려한 종료
+ */
 @RequiredArgsConstructor
 @Slf4j
 public class MemberServiceV2 {
