@@ -5,32 +5,20 @@ import com.hello.jdbc1.repository.MemberRepositoryV3;
 import java.sql.SQLException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 트랜잭션 - 트랜잭션 매니저
+ * 트랜잭션 - @Transactional AOP
  */
-@RequiredArgsConstructor
 @Slf4j
-public class MemberServiceV3_1 {
+@RequiredArgsConstructor
+public class MemberServiceV3_3 {
 
-    //    private final DataSource dataSource;
-    private final PlatformTransactionManager transactionManager;
     private final MemberRepositoryV3 memberRepository;
 
+    @Transactional(rollbackFor = {Exception.class})
     public void accountTransfer(String fromId, String toId, int money) throws SQLException {
-        // 트랜잭션 시작
-        TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());
-        try {
-            // 비즈니스 로직
-            bizLogic(fromId, toId, money);
-            transactionManager.commit(status);
-        } catch (Exception e) {
-            transactionManager.rollback(status);
-            throw e;
-        }
+        bizLogic(fromId, toId, money);
     }
 
     private void bizLogic(String fromId, String toId, int money) throws SQLException {

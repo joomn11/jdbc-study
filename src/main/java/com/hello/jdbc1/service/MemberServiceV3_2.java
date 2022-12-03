@@ -2,7 +2,6 @@ package com.hello.jdbc1.service;
 
 import com.hello.jdbc1.domain.Member;
 import com.hello.jdbc1.repository.MemberRepositoryV3;
-import java.sql.Connection;
 import java.sql.SQLException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -45,18 +44,6 @@ public class MemberServiceV3_2 {
     private void validation(Member member) {
         if (member.getMemberId().equals("ex")) {
             throw new IllegalStateException("이체중 예외 발생");
-        }
-    }
-
-    private void releaseConnection(Connection con) {
-//        JdbcUtils.closeConnection(con); //고려할 사항이 존재해서 사용 안함
-        if (con != null) {
-            try {
-                con.setAutoCommit(true); // Connection Pool 고려
-                con.close();
-            } catch (Exception e) {
-                log.info("error", e);
-            }
         }
     }
 }
