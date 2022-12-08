@@ -1,7 +1,7 @@
 package com.hello.jdbc1.repository;
 
 import com.hello.jdbc1.domain.Member;
-import com.hello.jdbc1.repository.except.MyDbException;
+import com.hello.jdbc1.repository.exception.MyDbException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

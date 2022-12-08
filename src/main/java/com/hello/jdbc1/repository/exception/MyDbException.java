@@ -1,4 +1,4 @@
-package com.hello.jdbc1.repository.except;
+package com.hello.jdbc1.repository.exception;
 
 public class MyDbException extends RuntimeException {
 
