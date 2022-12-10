@@ -2,7 +2,7 @@ package com.hello.jdbc1.service;
 
 import com.hello.jdbc1.domain.Member;
 import com.hello.jdbc1.repository.MemberRepository;
-import com.hello.jdbc1.repository.MemberRepositoryV4_1;
+import com.hello.jdbc1.repository.MemberRepositoryV5;
 import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.BadSqlGrammarException;
 
 /**
  * 트랜잭션 - dataSource, transactionManager 자동 등록
@@ -43,7 +44,7 @@ class MemberServiceV4Test {
 
         @Bean
         MemberRepository memberRepository() {
-            return new MemberRepositoryV4_1(dataSource);
+            return new MemberRepositoryV5(dataSource);
         }
 
         @Bean
@@ -107,5 +108,18 @@ class MemberServiceV4Test {
         Member findMemberEx = memberRepository.findById(memberEx.getMemberId());
         Assertions.assertThat(findMemberA.getMoney()).isEqualTo(10000);
         Assertions.assertThat(findMemberEx.getMoney()).isEqualTo(10000);
+    }
+
+    @Test
+    @DisplayName("문법오류 테스트 ")
+    void accountTransferEx2() {
+        // given
+        Member memberA = new Member(MEMBER_A, 10000);
+        memberRepository.save(memberA);
+
+        // when, then
+//        Assertions.assertThatThrownBy(() -> memberRepository.sqlErrorTest(memberA.getMemberId())).isInstanceOf(DataAccessException.class);
+        Assertions.assertThatThrownBy(() -> memberRepository.sqlErrorTest(memberA.getMemberId())).isInstanceOf(BadSqlGrammarException.class);
+
     }
 }

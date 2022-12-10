@@ -80,7 +80,7 @@ public class ExTranslatorV1Test {
                 pstmt.executeUpdate();
                 return member;
             } catch (SQLException e) {
-                if (e.getErrorCode() == 23505) {
+                if (e.getErrorCode() == 23505) { // 모든 DBMS의 error 코드를 변환해야 하는 문제 존재
                     throw new MyDuplicateKeyException(e);
                 }
                 throw new MyDbException(e);

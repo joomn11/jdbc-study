@@ -11,4 +11,8 @@ public interface MemberRepository {
     void update(String memberId, int money);
 
     void delete(String memberId);
+
+    default void sqlErrorTest(String memberId) {
+        
+    }
 }
