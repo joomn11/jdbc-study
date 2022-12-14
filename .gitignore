@@ -19,3 +19,5 @@ gradle-app.setting
 *.iml
 *.ipr
 *.class
+# Ignore Gradle build output directory
+build
