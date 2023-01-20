@@ -11,3 +11,4 @@ rootProject.name = 'jdbc-study'
 
 include 'jdbc1'
 include 'itemservice-db-start'
+include 'springtx'

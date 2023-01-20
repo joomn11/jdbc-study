@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/itemservice-db-start" />
             <option value="$PROJECT_DIR$/jdbc1" />
+            <option value="$PROJECT_DIR$/springtx" />
           </set>
         </option>
       </GradleProjectSettings>
